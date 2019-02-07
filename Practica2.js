@@ -12,4 +12,8 @@ app.get('/json', (req,res)=>{
     res.json ({'name' : 'Cucho'});
 });
 
+app.post('/json',(req,res)=>{
+    res.json({'name':'Jelly'});
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
