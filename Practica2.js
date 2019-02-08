@@ -8,12 +8,12 @@ const port = 3000
     res.send(`<h3>Hello ${req.params.name}!</h3>`)
 });*/
 
-app.get('/json', (req,res)=>{
-    res.json ({'name' : 'Cucho'});
+app.post('/alumnos', (req,res)=>{
+    res.json ([{'name' : 'Cucho'},{'name' : 'Alicia'}, {'name' : 'Carlos'}, {'name' : 'Antonio'}]);
 });
 
-app.post('/json',(req,res)=>{
-    res.json({'name':'Jelly'});
+app.post('/alumnos/:name',(req,res)=>{
+    res.json({'name' : `${req.params.name}`});
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
