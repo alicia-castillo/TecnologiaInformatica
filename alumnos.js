@@ -30,7 +30,7 @@ var db = {
         });
         return selected;
     },
-    getAlumnoBy2 : function(req) {
+    getAlumnoBy2 : function(req,res) {
         var encontrado = false;
         console.log(alumnos);
        //console.log(req.params.id + "the second ");
@@ -40,6 +40,7 @@ var db = {
             console.log("found it");
             encontrado = true;
             console.log(alumnos[i]);
+            res.send(alumnos[i]);
            return i;
         }
     }
@@ -58,23 +59,22 @@ var db = {
     }
 }
 db.initDB();
-app.post('/alumnos', function(req, res){
+app.get('/alumnos', function(req, res){
     db.initDB();
+    res.send(alumnos);
 });
 
-app.post('/alumnos/:id', function(req,res){
+app.get('/alumnos/:id', function(req,res){
     //console.log(req.params.id);
     //db.getAlumnoBy("id",req.params.id);
-    db.getAlumnoBy2(req);
+    db.getAlumnoBy2(req,res);
 });
 
-app.post('/agrega', function (req, res) {
+app.post('/alumnos', function (req, res) {
     //agregar un nuevo usuario
-    //res.send('Recibí un post para agregar ' + req.body.nombre + "," + req.body.password);
-    //console.log('Cuerpo del Post:' + req.body.nombre);
+    console.log('Cuerpo del Post:' + req.body);
     console.log('Agregando usuario...');
     console.log(req.body);
-    //req.body.id = Date.now();
     alumnos.push(req.body);
     res.json({ agregado: 'ok' });
     db.addAlumno();
