@@ -1,6 +1,1 @@
-[
-    {"nombre" : "Alicia", "cveUnica" : "235491" },
-    {"nombre" : "Antonio", "cveUnica" : "235498" },
-    {"nombre" : "Carlos", "cveUnica" : "235945" },
-    {"nombre" : "Lucero", "cveUnica" : "245668s" }
-]
+[{"nombre":"Alicia","id":"1"},{"nombre":"Antonio","id":"2"},{"nombre":"Carlos","id":"3"},{"nombre":"Lucero","id":"4"}]
