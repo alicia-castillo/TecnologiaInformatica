@@ -1,19 +1,20 @@
 const express = require('express');
+const bodyParser = require("body-parser");
 const app = new express();
 const port = 3000;
 var archivos = require('fs');
-var alumnos = [];
+var ingredientes = [];
 
 var db = {
     initDB : function(){
         //this.alumnos = require('/alumnos.json');
-        archivos.readFile('alumnos.json', function(error,datos)
+        archivos.readFile('ingredientes.json', function(error,datos)
         {
             if(error){
                 console.log('Error al leer el archivo');
             }else{
                 alumnos = JSON.parse(datos);
-                console.log(alumnos);
+                console.log(ingredientes);
             }
         });
     },   
@@ -80,6 +81,47 @@ app.post('/alumnos', function (req, res) {
     db.addAlumno();
 });
 
+app.get('/', function(req,res){
+    res.sendfile('index.html');
+});
+
+app.post('/user', function(req, res){
+    var user = req.body.nombre;
+    var pass = req.body.password;
+    console.log("name: " + user + " password: " + pass);
+    res.json({'status' : 'Ok'});
+});
+
 app.listen(port, function () {
     console.log('Servidor corriendo en el puerto: ' + port);
 });
+
+$(function(){
+        $("#enviar").on('click', function(){
+            var nom = $('#name').val();
+            var pass = $('#pass').val();
+            agregaUsuario(nom, pass);
+            console.log(nom + ' ' + pass);
+        })
+});
+
+/*function agregaUsuario(nom, pass){
+    
+    $.ajax({
+        url:  urlServidor + '/alumnos',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({nombre: `${nom}`, password: `${pass}`}),
+        success: function(resultado){
+            console.log(resultado);
+            //alumnos.push(req.body);
+            //res.json({ agregado: 'ok' });
+            //db.addAlumno();
+        },
+        error: function(error){
+            console.log('OCURRIÓ UN ERROR ');
+            console.log(error);
+        }
+    });
+    
+}*/
