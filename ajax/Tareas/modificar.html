@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Tarea modificacion</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+  <body>
+    <nav class="navbar navbar-light bg-info">
+        <a class="navbar-brand" href="#">
+            <img src="img/caret.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <h3 class="text-light">Tecnolog&iacute;as Inform&aacute;ticas</h3>
+        </a>
+        </nav>
+
+        <div class="container mrl-5 mt-3">
+                <form action="">
+                    <div class="form-group">
+                     <div class="row">
+                        <label for="">Nombre: </label>
+                        <input type="text" name="" id="nom" class="form-control" placeholder="">
+                     </div>
+                     <div class="row">
+                        <label for="">Clave: </label>
+                        <input type="text" name="" id="cve" class="form-control" placeholder="">
+                     </div>
+                    </div>
+                    <button type="button" id="modificar" class="btn btn-warning form-control">Modificar</button>
+                </form>
+                <div class="clear"></div>
+    <div>
+    </div>
+
+</div>
+        </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  </body>
+
+  <script>
+      $(document).ready(function(){
+        getAlumno();
+      });
+
+      function getAlumno(){
+        var param = window.location.search.substring(1).split("=")[1];
+        $.get("http://localhost:3000/alumnos/"+param+"/", function(data){
+            console.log(data);
+            $("#nom").val(data.nombre);
+            $("#cve").val(data.clave);
+        });
+
+        $('#modificar').on('click', (event)=>{
+          console.log("Modificando usuario: " + param);
+                sendPUTRequest({"clave" : param});
+});
+
+function sendPUTRequest(body_object) {
+            //Llamada delete al backend por medio de jquery
+            $.ajax({
+                method: "DELETE",
+                url: "http://localhost:3000/alumnos",
+                data: body_object
+                })
+                .done(function( msg ) {
+                    //alert( "Alumno modificado: " + body_object.clave );
+                })
+                .fail(function(msg){
+                    alert("Error al modificar alumno: " + body_object.clave)
+                }); 
+
+                var alumno = { }; //Creacion de objeto con la info necesaria.
+                alumno.nombre = $("#nom").val();
+                alumno.clave = $("#cve").val();
+                $.post("http://localhost:3000/alumnos", alumno , 
+            function(){
+                alert("Alumno modificado.");
+                //Actualizamos la lista html para ver los cambios.
+            });
+                
+        }
+      }
+  //$("#nombre").val;
+  </script>
