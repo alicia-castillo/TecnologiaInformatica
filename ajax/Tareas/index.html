@@ -74,8 +74,8 @@
                 console.log(data);
                 data.forEach(alumno => {
                     listHTML += "<li class='list-group-item'>" + 
-                    " <button type='button' class='delete btn btn-danger btn-sm' data-clave='"+ alumno.clave +"'> <i class='material-icons'>delete</i> </button>" + 
-                    "<a href='modificar.html?="+ alumno.clave +"' <button type='button' class='modificar btn btn-warning btn-sm' data-clave='"+ alumno.clave +"'> <i class='material-icons'>modificar</i> </button></a>"
+                    " <button type='button' class='delete btn btn-danger btn-sm' data-clave='"+ alumno.clave +"'> <i class='fas fa-trash-alt'></i>delete</i> </button>" + 
+                    "<a href='modificar.html?="+ alumno.clave +"' <button type='button' class='modificar btn btn-warning btn-sm' data-clave='"+ alumno.clave +"'> <i class='far fa-edit'></i>modificar</i> </button></a>"
                     +" ♥ Clave : " + alumno.clave + " | Nombre: " + alumno.nombre +  " ♥</li>";
                 });
                 $("#lista-alumnos").html(listHTML);
