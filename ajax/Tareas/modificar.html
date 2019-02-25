@@ -30,7 +30,7 @@
                         <input type="text" name="" id="cve" class="form-control" placeholder="">
                      </div>
                     </div>
-                    <button type="button" id="modificar" class="btn btn-warning form-control">Modificar</button>
+                    <button type="button" id="modify" class="btn btn-warning form-control">Modificar</button>
                 </form>
                 <div class="clear"></div>
     <div>
@@ -38,52 +38,7 @@
 
 </div>
         </div>
+        <script src="index.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   </body>
-
-  <script>
-      $(document).ready(function(){
-        getAlumno();
-      });
-
-      function getAlumno(){
-        var param = window.location.search.substring(1).split("=")[1];
-        $.get("http://localhost:3000/alumnos/"+param+"/", function(data){
-            console.log(data);
-            $("#nom").val(data.nombre);
-            $("#cve").val(data.clave);
-        });
-
-        $('#modificar').on('click', (event)=>{
-          console.log("Modificando usuario: " + param);
-                sendPUTRequest({"clave" : param});
-});
-
-function sendPUTRequest(body_object) {
-            //Llamada delete al backend por medio de jquery
-            $.ajax({
-                method: "DELETE",
-                url: "http://localhost:3000/alumnos",
-                data: body_object
-                })
-                .done(function( msg ) {
-                    //alert( "Alumno modificado: " + body_object.clave );
-                })
-                .fail(function(msg){
-                    alert("Error al modificar alumno: " + body_object.clave)
-                }); 
-
-                var alumno = { }; //Creacion de objeto con la info necesaria.
-                alumno.nombre = $("#nom").val();
-                alumno.clave = $("#cve").val();
-                $.post("http://localhost:3000/alumnos", alumno , 
-            function(){
-                alert("Alumno modificado.");
-                //Actualizamos la lista html para ver los cambios.
-            });
-                
-        }
-      }
-  //$("#nombre").val;
-  </script>

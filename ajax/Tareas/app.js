@@ -57,6 +57,20 @@ var db = {
                 console.log(error);
             }
         });
+    },
+
+    modifyAlumno : function(claveOld, claveNew, nombreNew){
+      var index;
+      for(index=0; index < this.alumnos.length; index++){
+        if(this.alumnos[index].clave == claveOld )
+        break;
+      }
+      if(index<this.alumnos.length){
+        this.alumnos[index].clave = claveNew;
+        this.alumnos[index].nombre = nombreNew;
+        db.saveAlumnos();
+      }
+
     }
     
 }
@@ -94,11 +108,12 @@ app.route("/alumnos")
   })
   .put((req,res)=>{
     db.initDB();
+    console.log("IM IN PUTTTT"+req);
     var alumno = req.body;
+    //db.deleteAlumnoByClave(alumno.clave);
+    //db.alumnos.push(alumno);
+    db.modifyAlumno(alumno.claveOld, alumno.claveNew, alumno.nombreNew);
     console.log(alumno);
-    db.deleteAlumnoByClave(alumno.clave);
-    db.alumnos.push(alumno);
-    console.log(alumnos);
     res.json({'status': 'ok'});
   });
 
@@ -112,3 +127,4 @@ app.get('/alumnos/:clave', (req, res) => {
 app.listen(3000,function(){
   console.log("Started on PORT 3000");
 })
+
