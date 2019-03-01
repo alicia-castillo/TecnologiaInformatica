@@ -73,6 +73,9 @@ app.post('/ingredientes',function(req,res){
   res.json({'status' : 'OK'});
 });
 
+//app.route("/alumnos").get()//para separar rutas multiples con dif. funciones
+
+
 app.listen(3000,function(){
   console.log("Started on PORT 3000");
 })
